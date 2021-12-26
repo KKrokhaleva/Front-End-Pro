@@ -29,7 +29,7 @@ function getNumber(message) {
 	do {
 		number = +prompt(message, "0");
 	} while (!isFinite(parseFloat(number)) || isNaN(number));
-	return number
+	return number;
 }
 
 // Функция суммирования всех значений по ключу в массиве объектов
@@ -139,7 +139,7 @@ function sortByPriceMinToMax(item) {
 
 
 // Задание №7 Функция для сортировки (от большего к меньшему и наоборот ) и фильтра (диапазон цены или категория)
-function sortMinMaxAndFilter(item) {
+function sortMinMaxAndFilter() {
 	let operation;
 	do {
 		operation = +prompt(`Choose an operation :
