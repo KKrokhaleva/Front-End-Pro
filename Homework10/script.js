@@ -37,7 +37,7 @@ function chekToUpperCase(item) {
 
 let result = "";
 
-// Функция для выборки из объекта строковых значенй в верхнем регистре
+// Функция для выборки из объекта строковых значений в верхнем регистре
 function getUpperCaseLetter(obj) {
 	for (let [index, key] of Object.entries(obj)) {
 		if (typeof key === 'string') {

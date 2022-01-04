@@ -96,3 +96,4 @@ function getDiffInDollarExchangeRate() {
 	alert (`the sum of your difference is ${Diff.toFixed(1)}UAH`)
 }
 getDiffInDollarExchangeRate()
+
