@@ -9,7 +9,6 @@ let values = [];
          let resultText = resultIndex.querySelector(`.list-sub__link`);
          if (resultText){  values.push(resultText.textContent);}
     }
-    console.log(values);
          switch (style) {
              case "number" :
                  for( let i=0; values.length > i; i++){
