@@ -15,5 +15,4 @@ Diff: ${firstNumber} - ${secondNumber} = ${diff}
 Mult: ${firstNumber} * ${secondNumber} = ${mult} 
 Div: ${firstNumber} / ${secondNumber} = ${div}`);
 
-// test 2
-// test 2
+
