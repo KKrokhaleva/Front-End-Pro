@@ -117,28 +117,20 @@ function deleteItemByName(item) {
 // Задание №6 -Функция сортировки от большего к меньшему
 function sortByPriceMaxToMin(item) {
 	item.sort((a, b) => b.price - a.price);
-	let result = [];
-	item.forEach(function (item) {
-		result.push(item);
-	})
-	return result;
+	return item;
 }
-//console.log (sortByPriceMaxToMin(stationeryStore));
+// console.log(sortByPriceMaxToMin(stationeryStore));
 
 
 // Задание №6 Функция сортировки от меньшего к большему 
 function sortByPriceMinToMax(item) {
 	item.sort((a, b) => a.price - b.price);
-	let result = [];
-	item.forEach(function (item) {
-		result.push(item)
-	})
-	return result;
+	return item;
 }
-//console.log(sortByPriceMinToMax(stationeryStore)); 
+//console.log(sortByPriceMinToMax(stationeryStore));
 
 
-// Задание №7 Функция для сортировки (от большего к меньшему и наоборот ) и фильтра (диапазон цены или категория)
+// Задание №7 Функция для сортировки (от большего к меньшему и наоборот) и фильтра (диапазон цены и категория)
 function sortMinMaxAndFilter() {
 	let operation;
 	do {
