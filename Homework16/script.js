@@ -25,7 +25,7 @@ function createCar(color = 'red', consumption = 10, tankVolume = 60,) {
     }
 
 // Функция валидации входящих значений для функции езды
-    function _rideInput(speed, distance) {
+    function _checkRideInput(speed, distance) {
         if (!_isNumber(speed)) {
             console.warn('speed ride function parameter must be a Number');
             return false;
@@ -67,6 +67,16 @@ function createCar(color = 'red', consumption = 10, tankVolume = 60,) {
     function _checkGasExisting() {
         return car.gasVolume !== 0;
     }
+    function _fuelConsumption(speed) {
+        if (speed < 50) {
+            consumption = 0.8 * consumption;
+        }
+        if (speed >= 120) {
+            consumption = 1.2 * consumption;
+        }
+        consumptionGas = consumption / 100;
+        return consumptionGas;
+    }
 
 // Конструктор машин
     let car = {
@@ -95,13 +105,14 @@ function createCar(color = 'red', consumption = 10, tankVolume = 60,) {
 
         //Функция старта машины
         start() {
+            clearInterval(_startInterval);
             if (car.gasVolume === 0) {
                 _checkAvailabilityGas();
             }
             car.ignition = true;
             _startInterval = setInterval(function () {
                 if (_checkGasExisting(car.gasVolume)) {
-                    car.gasVolume -= 1;
+                    car.gasVolume -= 0.1;
                 } else {
                     car.stop();
                     console.warn('Fuel  is end');
@@ -117,17 +128,11 @@ function createCar(color = 'red', consumption = 10, tankVolume = 60,) {
 
         //Функция езды с указанием расстояния и скорости
         ride(speed, distance) {
-            if (!_rideInput(speed, distance)) {
+            car.ignition= true;
+            if (!_checkRideInput(speed, distance)) {
                 return;
             }
-            if (speed < 50) {
-                consumption = 0.8 * consumption;
-            }
-            if (speed >= 120) {
-                consumption = 1.2 * consumption;
-            }
-            consumptionGas = consumption / 100;
-
+            _fuelConsumption(speed);
             if (car.gasVolume >= distance * consumptionGas) {
                 car.gasVolume = car.gasVolume - distance * consumptionGas;
                 console.log(`The car covered ${distance} kilometers in ${(distance / speed * 60).toFixed(2)} minutes at a speed of ${speed} km/h, the rest of the gas is ${car.gasVolume.toFixed(2)} liters`);
@@ -138,6 +143,7 @@ function createCar(color = 'red', consumption = 10, tankVolume = 60,) {
             } else {
                 _checkAvailabilityGas();
             }
+            car.ignition = false;
         }
     }
     return car;
