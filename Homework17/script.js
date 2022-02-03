@@ -3,9 +3,9 @@
 !(function () {
     function createElement({tagName = 'div', classes = [], dataAttributes = {}, textContent = ' '}) {
         if (typeof tagName !== 'string') {
-            console.warn('tagName _createElement method of App must be string');
+            console.warn('tagName createElement method of App must be string');
             let errorElement = document.createElement('div');
-            errorElement.textContent = 'tagName _createElement method of App must be string';
+            errorElement.textContent = 'tagName createElement method of App must be string';
             return errorElement;
         }
 
@@ -14,7 +14,7 @@
         if (typeof  textContent === 'string') {
             element.textContent = textContent;
         } else {
-            console.warn('tagName _createElement method of App must be string');
+            console.warn('textContent createElement method of app must be string');
         }
 
         if (Array.isArray(classes)) {
@@ -22,17 +22,17 @@
                 if (typeof className === 'string') {
                     element.classList.add(className);
                 } else {
-                    console.warn('classes element of App _createElement method must be string');
+                    console.warn('classes element of App createElement method must be string');
                 }
             })
         }
 
-        if(typeof  dataAttributes === 'object' && dataAttributes ) {
+        if (typeof  dataAttributes === 'object' && dataAttributes ) {
             Object.entries(dataAttributes).forEach(pair => {
                 if (typeof pair[0] === 'string' || typeof pair[1]==='string') {
                     element.setAttribute(pair[0],pair[1]);
                 } else {
-                    console.warn('dataAttributes element of App _createElement method must be a string');
+                    console.warn('dataAttributes element of App createElement method must be a string');
                 }
             })
         }
@@ -42,12 +42,17 @@
 
 
     function App() {
+           this.cardsArr =[];
+          this.init = function () {
+              _init();
+          }
+
         let LS = localStorage;
         let _body = document.querySelector('body');
         let _nameField, _descriptionField, _cardsBlock;
 
         //Read
-        function _getCards() {
+        let _getCards = () => {
             let cardsJSON = LS.getItem('cards');
             if (cardsJSON) {
                 let cardsData = JSON.parse(cardsJSON);
@@ -62,7 +67,7 @@
             }
         }
 
-        function _init() {
+        let _init = () => {
             let appBlock = createElement({classes: ['container']});
             let title = createElement({tagName: 'h1', textContent: 'Awesome TODO app'});
             let createCardButton = createElement({tagName: 'button', textContent: 'Create card', classes: ['btn', 'btn-primary']});
@@ -74,12 +79,12 @@
             appBlock.append(title, _nameField, _descriptionField, createCardButton, _cardsBlock);
             _body.append(appBlock);
 
-            createCardButton.addEventListener('click', _createCard.bind(this));
+            createCardButton.addEventListener('click', _createCard);
 
-            _getCards.call(this);
+            _getCards();
         }
 
-        function _createCard() {
+        let _createCard = () => {
             let cardTitle = _nameField.value;
             let cardText = _descriptionField.value;
 
@@ -98,7 +103,7 @@
                 if(!isCreate) return;
             }
 
-            let card = Card({cardTitle,cardText});
+            let card = new Card({cardTitle,cardText});
 
             this.cardsArr.push(card);
 
@@ -114,7 +119,7 @@
             _cardsBlock.append(card.element);
         }
 
-        function _validateTextField (field) {
+        let _validateTextField = (field) => {
             if (field.value === ' ') {
                 field.classList.add('is-invalid');
                 return false;
@@ -123,24 +128,15 @@
                 return true;
             }
         }
-
-        return {
-            cardsArr: [],
-            init() {
-                _init.call(this);
-            }
-        }
     }
 
     function  Card({cardTitle = '', cardText = ''}) {
 
 
-        function  _createElement () {
+        let _createElement =  () => {
             let cardElement = createElement({classes: ['card']});
-            let cardTitleElement = createElement({tagName: 'h5', classes:['card-title'],
-                textContent: cardTitle});
-            let cardTextElement = createElement({tagName: 'p', classes:['card-text'],
-                textContent: cardText});
+            let cardTitleElement = createElement({tagName: 'h5', classes:['card-title'], textContent: cardTitle});
+            let cardTextElement = createElement({tagName: 'p', classes:['card-text'], textContent: cardText});
 
             let controlsContainer = createElement({classes: ['controls-container']});
             cardElement.append(cardTitleElement, cardTextElement, controlsContainer);
@@ -148,15 +144,15 @@
         }
 
         let _element = _createElement();
-        return{
-            title: cardTitle,
-            text: cardText,
-            element: _element,
-        }
+       this.title = cardTitle;
+       this.text = cardText;
+       this.element = _element;
     }
 
-    let app= App();
+    let app = new App();
     app.init();
+
+    console.log(app)
 }());
 
 
