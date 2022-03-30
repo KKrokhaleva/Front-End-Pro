@@ -1,0 +1,60 @@
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+button {
+  cursor: pointer;
+}
+body {
+  padding-top: 40px;
+}
+.container{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.container h1 {
+  margin: 10px 25%;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+.form-select{
+  width: 20% !important;
+  height: 40px;
+  margin-left: 10px;
+}
+.box{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+.controls-container{
+  display: flex;
+  align-items: center;
+}
+
+.cards {
+  margin: 10px 0;
+  padding: 5px 0;
+  border: 2px solid rgba(128, 128, 128, 0.59);
+}
+.card-tittle,.card-text{
+  margin-left: 15px;
+}
+
+.card--important {
+  border: 2px solid rgb(10, 69, 146);
+}
+
+.btn {
+  padding: 0 0 10px 10px;
+  margin: 0 0 10px 10px;
+}
+.form-check-input {
+  margin: 0 10px 5px 10px;
+}
+
+.form-check-label {
+  vertical-align: text-bottom;
+}
